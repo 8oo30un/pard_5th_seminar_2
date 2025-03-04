@@ -1,13 +1,12 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+// pages/api/hello.ts
+import { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-  name: string;
-};
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
-) {
-  res.status(200).json({ name: "John Doe" });
+// GET 요청 처리
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "GET") {
+    res.status(200).json({ message: "Hello, world!" });
+  } else {
+    // 허용되지 않은 메소드에 대한 응답
+    res.status(405).json({ error: "Method Not Allowed" });
+  }
 }
